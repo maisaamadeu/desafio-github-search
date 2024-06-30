@@ -3,6 +3,9 @@ package br.com.igorbag.githubsearch.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.igorbag.githubsearch.R
 import br.com.igorbag.githubsearch.domain.Repository
@@ -22,34 +25,34 @@ class RepositoryAdapter(private val repositories: List<Repository>) :
 
     // Pega o conteudo da view e troca pela informacao de item de uma lista
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //@TODO 8 -  Realizar o bind do viewHolder
-        //Exemplo de Bind
-        //  holder.preco.text = repositories[position].atributo
+        val repo: Repository = repositories[position]
+        val repoName: String = repo.name
 
-        // Exemplo de click no item
-        //holder.itemView.setOnClickListener {
-        // carItemLister(repositores[position])
-        //}
+        holder.itemView.setOnClickListener {
+            carItemLister(repo)
+        }
 
-        // Exemplo de click no btn Share
-        //holder.favorito.setOnClickListener {
-        //    btnShareLister(repositores[position])
-        //}
+        holder.tvPreco.text = repoName
+
+        holder.ivFavorite.setOnClickListener {
+            btnShareLister(repo)
+        }
+
     }
 
     // Pega a quantidade de repositorios da lista
-    //@TODO 9 - realizar a contagem da lista
-    override fun getItemCount(): Int = 0
+    override fun getItemCount(): Int = repositories.size
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        //@TODO 10 - Implementar o ViewHolder para os repositorios
-        //Exemplo:
-        //val atributo: TextView
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val ivFavorite: ImageView
+        val tvPreco: TextView
 
-        //init {
-        //    view.apply {
-        //        atributo = findViewById(R.id.item_view)
-        //    }
+        init {
+            view.apply {
+                ivFavorite = findViewById(R.id.iv_favorite)
+                tvPreco = findViewById(R.id.tv_preco)
+            }
+        }
 
     }
 }
